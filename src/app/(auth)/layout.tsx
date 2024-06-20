@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/commons/Logo";
 import { PropsWithChildren } from "react";
 
 const layout: React.FC<PropsWithChildren> = ({ children }) => {
