@@ -6,6 +6,7 @@ import { DateRangePicker } from "../ui/date-range-picker";
 import { MAX_DATE_RANGE_DAYS } from "@/lib/constants";
 import { toast } from "sonner";
 import StatsSection from "./StatsSection";
+import CategoriesStats from "./CategoriesStats";
 
 type Props = {
   userSettings: UserSettings;
@@ -42,6 +43,7 @@ const Overview: React.FC<Props> = ({ userSettings }) => {
       </div>
       <div className="container flex w-full flex-col gap-2">
         <StatsSection userSettings={userSettings} dateRange={dateRange} />
+        <CategoriesStats userSettings={userSettings} dateRange={dateRange} />
       </div>
     </>
   );

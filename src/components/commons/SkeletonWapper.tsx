@@ -10,7 +10,7 @@ type Props = {
 const SkeletonWapper: React.FC<Props> = ({
   children,
   isLoading,
-  fullWidth,
+  fullWidth = true,
 }) => {
   if (!isLoading) return children;
   return (
