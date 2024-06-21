@@ -1,6 +1,8 @@
 import { ComboboxCurencyItemType } from "@/types/ComboboxItem.type";
 import { NavBarItemType } from "@/types/NavBarItem.type";
 
+export const MAX_DATE_RANGE_DAYS = 90;
+
 export const NAVBAR_ITEMS: NavBarItemType[] = [
   {
     label: "Dashboard",

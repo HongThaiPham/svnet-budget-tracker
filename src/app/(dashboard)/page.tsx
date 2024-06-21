@@ -1,4 +1,5 @@
 import CreateTransactionDialog from "@/components/dashboard/CreateTransactionDialog";
+import Overview from "@/components/overview/Overview";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
@@ -52,6 +53,7 @@ async function page() {
           </div>
         </div>
       </div>
+      <Overview userSettings={userSettings} />
     </div>
   );
 }
