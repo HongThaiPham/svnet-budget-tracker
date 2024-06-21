@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 export async function CreateCategory(form: CreateCategorySchemaType) {
   const parsedBody = CreateCategorySchema.safeParse(form);
   if (!parsedBody.success) {
-    return Response.json(parsedBody.error, { status: 400 });
+    return new Error(parsedBody.error.message);
   }
 
   const user = await currentUser();
@@ -20,7 +20,7 @@ export async function CreateCategory(form: CreateCategorySchemaType) {
   }
 
   const { name, icon, type } = parsedBody.data;
-  return await prisma.category.create({
+  const category = await prisma.category.create({
     data: {
       userId: user.id,
       name,
@@ -28,4 +28,6 @@ export async function CreateCategory(form: CreateCategorySchemaType) {
       type,
     },
   });
+
+  return category;
 }

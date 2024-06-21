@@ -1,7 +1,7 @@
 "use client";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NavBarItemType } from "@/types/NavBarItem.tyle";
+import { NavBarItemType } from "@/types/NavBarItem.type";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";

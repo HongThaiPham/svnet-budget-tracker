@@ -3,7 +3,7 @@
 import useCategories from "@/hooks/use-categories";
 import { TransactionType } from "@/types/Transaction.type";
 import { Category } from "@prisma/client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import CategoryRow from "./CategoryRow";
@@ -21,15 +21,30 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   type: TransactionType;
+  onChange: (category: string) => void;
 };
 
-const CategoryPicker: React.FC<Props> = ({ type }) => {
+const CategoryPicker: React.FC<Props> = ({ type, onChange }) => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<string | null>(null);
   const categories = useCategories(type);
   const selectedCategory = categories.data?.find(
     (category: Category) => category.name === selected
   );
+
+  useEffect(() => {
+    if (!selected) return;
+    onChange(selected);
+  }, [onChange, selected]);
+
+  const onSuccessCallback = React.useCallback(
+    (category: Category) => {
+      setSelected(category.name);
+      setOpen((prev) => !prev);
+    },
+    [setSelected, setOpen]
+  );
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -54,7 +69,10 @@ const CategoryPicker: React.FC<Props> = ({ type }) => {
           }}
         >
           <CommandInput placeholder="Search category ..." />
-          <CreateCategoryDialog type={type} />
+          <CreateCategoryDialog
+            type={type}
+            successCallback={onSuccessCallback}
+          />
           <CommandEmpty>
             <p>Category not found</p>
             <p className="text-xs text-muted-foreground">
