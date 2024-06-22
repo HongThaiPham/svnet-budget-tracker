@@ -1,5 +1,12 @@
 import { ComboboxCurencyItemType } from "@/types/ComboboxItem.type";
 import { NavBarItemType } from "@/types/NavBarItem.type";
+import { mkConfig } from "export-to-csv";
+
+export const CSV_CONFIG = mkConfig({
+  fieldSeparator: ",",
+  decimalSeparator: ".",
+  useKeysAsHeaders: true,
+});
 
 export const MAX_DATE_RANGE_DAYS = 90;
 
